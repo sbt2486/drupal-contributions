@@ -9,7 +9,7 @@ services:
       - cd /app/web && composer install
     overrides:
       environment:
-        SIMPLETEST_BASE_URL: "https://drupal-contributions.lndo.site/"
+        SIMPLETEST_BASE_URL: "https://drupal-contributions.local.host/"
         SIMPLETEST_DB: "sqlite://localhost/tmp/db.sqlite"
         MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox"]}}, "http://chrome:9515"]'
   chrome:
@@ -23,7 +23,7 @@ tooling:
   drush:
     service: appserver
     cmd:
-      drush --root=/app/web --uri=https://drupal-contributions.lndo.site
+      drush --root=/app/web --uri=https://drupal-contributions.local.host
   si:
     service: appserver
     description: Install Drupal
@@ -58,7 +58,7 @@ tooling:
   test:
       service: appserver
       cmd:
-        - php /app/web/core/scripts/run-tests.sh --php /usr/local/bin/php --url https://drupal-contributions.lndo.site --color --verbose
+        - php /app/web/core/scripts/run-tests.sh --php /usr/local/bin/php --url https://drupal-contributions.local.host --color --verbose
 
 events:
   post-destroy:
